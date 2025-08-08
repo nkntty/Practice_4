@@ -17,6 +17,30 @@ Question4. Derived class wants to access base class's private data member. What 
 Base::func(x);
 Explanation: Since val is private in Base, you can only modify it via public functions of Base. Base::func(x) does exactly that.
 
-
-________________________________________________________________________________________________________________________________________________________________________________________________
 Question5
+5. Determine if a BSTNode is a left or right child of its parent
+Assuming each node has a parent pointer:
+
+if (node->parent->left == node)
+    std::cout << "Left child";
+else if (node->parent->right == node)
+    std::cout << "Right child";
+________________________________________________________________________________________________________________________________________________________________________________________________
+Question6. Sort unsorted linked list in O(N log N) time
+You can use merge sort for linked lists:
+
+
+ListNode* mergeSort(ListNode* head);
+// Split list into halves, recursively sort, and merge
+
+// OR, if copying is allowed and memory is sufficient:
+std::vector<int> values;
+while (head != nullptr) {
+    values.push_back(head->val);
+    head = head->next;
+}
+std::sort(values.begin(), values.end());
+// Rebuild or print sorted list
+____________________________________________________________________________________________________________________________________________________________________________________
+Question7
+
