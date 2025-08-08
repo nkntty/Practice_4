@@ -64,3 +64,57 @@ int checkHeight(Node* root){
     return 1 + std::max(leftHeight, rightHeight);
 }
 
+
+
+________________________________________________________________________________________________________________________________________
+Question8
+
+❗ Minor Fixes Needed:
+1. Output Formatting (Missing Tab)
+You're missing a \t (tab) between the number and the name when writing to the file:
+
+fout << itr.num << '\t' << itr.name << endl;
+Without the tab, the output won't match the original format (as shown in the question), which uses a tab to separate columns.
+
+2. Pass comparator by const reference
+Your compare() function should take const references to avoid unnecessary copies:
+
+
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct data {
+    int num;
+    string name;
+};
+
+bool compare(const data& d1, const data& d2) {
+    return d1.num < d2.num;
+}
+
+int main() {
+    ifstream fin("input.txt");
+    vector<data> input;
+    int n;
+    string s;
+
+    while (fin >> n >> s) {
+        input.push_back({n, s});
+    }
+    fin.close();
+
+    sort(input.begin(), input.end(), compare);
+
+    ofstream fout("input.txt");
+    for (auto& itr : input) {
+        fout << itr.num << '\t' << itr.name << endl;
+    }
+    fout.close();
+
+    return 0;
+}
+
