@@ -44,3 +44,23 @@ std::sort(values.begin(), values.end());
 ____________________________________________________________________________________________________________________________________________________________________________________
 Question7
 
+❌ What’s missing (and why it matters):
+You're not checking if a subtree below has already returned -1, meaning it’s unbalanced. If a left or right subtree is unbalanced, you must propagate -1 up, not use its height in further comparisons.
+
+✅ Corrected version:
+
+int checkHeight(Node* root){
+    if (root == nullptr) return 0;
+
+    int leftHeight = checkHeight(root->left);
+    if (leftHeight == -1) return -1; // Left subtree unbalanced
+
+    int rightHeight = checkHeight(root->right);
+    if (rightHeight == -1) return -1; // Right subtree unbalanced
+
+    if (abs(leftHeight - rightHeight) > 1)
+        return -1; // Current node unbalanced
+
+    return 1 + std::max(leftHeight, rightHeight);
+}
+
