@@ -1,0 +1,22 @@
+Question1. When using an iterator on an STL list of integers, which of the following will advance the iterator to the next item?
+Answer: a. itr++
+
+Explanation: itr++ advances the iterator to the next element in STL containers like std::list.
+
+Question2. Which data structure stores things in reverse chronological order (LIFO)?
+Answer: c. Stack
+
+Explanation: Stack operates on Last-In, First-Out principle.
+
+Question3. Which of the following would cause a class to be abstract?
+Answer: c. virtual void func()=0
+
+Explanation: This is a pure virtual function and makes a class abstract.
+
+Question4. Derived class wants to access base class's private data member. What do you write in Derived::func(int x)?
+Base::func(x);
+Explanation: Since val is private in Base, you can only modify it via public functions of Base. Base::func(x) does exactly that.
+
+
+________________________________________________________________________________________________________________________________________________________________________________________________
+Question5
