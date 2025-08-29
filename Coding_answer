@@ -118,3 +118,60 @@ int main() {
     return 0;
 }
 
+
+________________________________________________________________________________________________________________________________________
+❌Question9
+#include <stack>
+using namespace std;
+
+struct LListNode {
+    int data;
+    LListNode* next;
+    LListNode* prev;
+};
+
+struct BSTNode {
+    int data;
+    BSTNode* left;
+    BSTNode* right;
+};
+
+bool compare(LListNode* head, BSTNode* root) {
+    stack<BSTNode*> s;
+    BSTNode* curr = root;
+    LListNode* listCurr = head;
+
+    while ((curr || !s.empty())) {
+        // Push all left nodes
+        while (curr) {
+            s.push(curr);
+            curr = curr->left;
+        }
+
+        // Process top node
+        curr = s.top();
+        s.pop();
+
+        // If list is already finished but BST still has nodes
+        if (!listCurr) return false;
+
+        // Compare data
+        if (curr->data != listCurr->data) return false;
+
+        // Advance list pointer
+        listCurr = listCurr->next;
+
+        // Move to right subtree
+        curr = curr->right;
+    }
+
+    // If list still has elements, mismatch
+    return (listCurr == nullptr);
+}
+
+
+
+
+
+
+
