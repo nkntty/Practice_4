@@ -121,57 +121,23 @@ int main() {
 
 ________________________________________________________________________________________________________________________________________
 ❌Question9
-#include <stack>
-using namespace std;
+bool checkHelper(LListNode*& head, BSTNode* root) {
+    if (!root) return true;  // Empty subtree is fine
 
-struct LListNode {
-    int data;
-    LListNode* next;
-    LListNode* prev;
-};
+    // Traverse left
+    if (!checkHelper(head, root->left)) return false;
 
-struct BSTNode {
-    int data;
-    BSTNode* left;
-    BSTNode* right;
-};
+    // Compare current node
+    if (!head || head->data != root->data) return false;
 
-bool compare(LListNode* head, BSTNode* root) {
-    stack<BSTNode*> s;
-    BSTNode* curr = root;
-    LListNode* listCurr = head;
+    // Move list pointer
+    head = head->next;
 
-    while ((curr || !s.empty())) {
-        // Push all left nodes
-        while (curr) {
-            s.push(curr);
-            curr = curr->left;
-        }
-
-        // Process top node
-        curr = s.top();
-        s.pop();
-
-        // If list is already finished but BST still has nodes
-        if (!listCurr) return false;
-
-        // Compare data
-        if (curr->data != listCurr->data) return false;
-
-        // Advance list pointer
-        listCurr = listCurr->next;
-
-        // Move to right subtree
-        curr = curr->right;
-    }
-
-    // If list still has elements, mismatch
-    return (listCurr == nullptr);
+    // Traverse right
+    return checkHelper(head, root->right);
 }
 
-
-
-
-
-
-
+bool check(LListNode* head, BSTNode* root) {
+    bool result = checkHelper(head, root);
+    return result && (head == nullptr); // Ensure list is fully consumed
+}
